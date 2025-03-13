@@ -112,6 +112,8 @@ python src/benchmark.py --n 10
 
 3. Sometimes, the best thing is to manually observe what's going on -- print any outputs you can and observe what the agent is doing for some question.
 
+For this, you can also use provided Streamlit demo, run it using `streamlit run src/app.py`.
+
 ### Will this be used in the end?
 
 With your approval to use them, yes! If your agent achieves at least 50% accuracy on questions (proxy to know that he isn't losing money), I will add them to the production deployment with other agents and they will be live at Presagio. 
