@@ -1,5 +1,9 @@
-from advanced_agent import AdvancedAgent
-from basic_agent import BasicAgent
+# from advanced_agent import AdvancedAgent
+# from basic_agent import BasicAgent
+# from your_agent import YourAgent
+# from openai_search_agent_high import OpenaiSearchAgentHigh
+from openai_search_agent_variable import OpenaiSearchAgentVariable
+
 from prediction_market_agent_tooling.benchmark.agents import (
     AbstractBenchmarkedAgent,
 )
@@ -50,16 +54,47 @@ def main(
 
     print(f"Found {len(markets_deduplicated)} markets.")
 
+    agents = [
+        # BenchmarkAgent(agent=AdvancedAgent()),
+        # BenchmarkAgent(agent=YourAgent()),
+        # BenchmarkAgent(agent=OpenaiSearchAgentHigh())
+    ]
+
+    settings = ["high"]
+
+    # Create additional agents with nested loops.
+    for reasoning in settings:
+        for search_context_size in settings:
+            # Instantiate the agent without parameters.
+            agent_instance = OpenaiSearchAgentVariable()
+            # Call the load method to set up the custom parameters.
+            agent_instance.load(reasoning=reasoning, search_context_size=search_context_size)
+            agents.append(BenchmarkAgent(agent=agent_instance))
+
+    # Now pass the full list to your Benchmarker.
     benchmarker = Benchmarker(
         markets=markets_deduplicated,
-        agents=[
-            BenchmarkAgent(agent=AdvancedAgent()),
-            BenchmarkAgent(agent=BasicAgent()),
-            # BenchmarkAgent(agent=YourAgent()), # TODO: Uncomment this line after implementing YourAgent.
-        ],
+        agents=agents,
         cache_path=cache_path,
         only_cached=only_cached,
     )
+
+
+    # benchmarker = Benchmarker(
+    #     markets=markets_deduplicated,
+    #     agents=[
+    #         BenchmarkAgent(agent=AdvancedAgent()),
+    #         BenchmarkAgent(agent=BasicAgent()),
+    #         # BenchmarkAgent(agent=YourAgent()), 
+    #         BenchmarkAgent(agent=OpenaiSearchAgentHigh()),
+            
+    #         for web_search in settings:
+    #             for reasoning in settings:
+    #                 BenchmarkAgent(agent=OpenaiSearchAgentVariable(web_search, reasoning)), 
+    #     ],
+    #     cache_path=cache_path,
+    #     only_cached=only_cached,
+    # )
 
     benchmarker.run_agents()
     md = benchmarker.generate_markdown_report()
@@ -71,7 +106,9 @@ def main(
 
 class BenchmarkAgent(AbstractBenchmarkedAgent):
     def __init__(self, agent: DeployableTraderAgent) -> None:
-        super().__init__(agent_name=agent.__class__.__name__, max_workers=1)
+        # Use the custom name if set, otherwise fallback on the class name.
+        agent_name = getattr(agent, "custom_agent_name", agent.__class__.__name__)
+        super().__init__(agent_name=agent_name, max_workers=1)
         self.agent = agent
 
     def predict(self, market_question: str) -> Prediction:

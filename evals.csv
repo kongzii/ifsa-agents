@@ -1,0 +1,12 @@
+Agents,MSE for p_yes,Mean confidence,% within +-0.05,% within +-0.1,% within +-0.2,% correct outcome,% precision for yes,% precision for no,% recall for yes,% recall for no,confidence/p_yes error correlation,Mean info_utility,Proportion answerable,Proportion answered,Mean cost ($),Mean time (s)
+OpenaiSearchAgentHigh,0.0972761,0.645455,18.1818,18.1818,27.2727,45.4545,50,42.8571,33.3333,60,-0.0931103,,1,0.55,,
+"OpenaiSearchAgentVariable (reasoning=low, search_context_size=low)",0.111357,0.7425,15,35,55,65,71.4286,61.5385,50,80,0.237798,,1,1,,
+"OpenaiSearchAgentVariable (reasoning=low, search_context_size=medium)",0.118189,0.7275,15,25,50,60,66.6667,57.1429,40,80,0.370676,,1,1,,
+"OpenaiSearchAgentVariable (reasoning=low, search_context_size=high)",0.111162,0.7175,10,35,55,70,83.3333,64.2857,50,90,-0.149673,,1,1,,
+"OpenaiSearchAgentVariable (reasoning=medium, search_context_size=low)",0.118585,0.7165,25,40,55,65,71.4286,61.5385,50,80,0.366815,,1,1,,
+"OpenaiSearchAgentVariable (reasoning=medium, search_context_size=medium)",0.120755,0.6625,25,45,55,65,71.4286,61.5385,50,80,-0.253487,,1,1,,
+"OpenaiSearchAgentVariable (reasoning=medium, search_context_size=high)",0.111844,0.7195,30,50,55,65,71.4286,61.5385,50,80,0.251514,,1,1,,
+"OpenaiSearchAgentVariable (reasoning=high, search_context_size=low)",0.117988,0.645,15,45,65,60,66.6667,57.1429,40,80,0.0751594,,1,1,,
+"OpenaiSearchAgentVariable (reasoning=high, search_context_size=medium)",0.115736,0.685,15,35,50,55,57.1429,53.8462,40,70,0.271285,,1,1,,
+"OpenaiSearchAgentVariable (reasoning=high, search_context_size=high)",0.107958,0.665,15,50,65,70,83.3333,64.2857,50,90,0.132248,,1,1,,
+
